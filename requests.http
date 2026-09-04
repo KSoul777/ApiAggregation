@@ -1,0 +1,47 @@
+### API Aggregator — sample requests (VS Code REST Client / Visual Studio / Rider)
+
+@api = http://localhost:5247
+@keycloak = http://localhost:8080
+
+### Health (always anonymous)
+GET {{api}}/health
+
+### --- Auth: get a JWT via Keycloak password grant (user demo/demo) ---
+# @name token
+POST {{keycloak}}/realms/aggregator/protocol/openid-connect/token
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=password&client_id=aggregator-api&username=demo&password=demo
+
+### Capture the access token from the response above
+@bearer = {{token.response.body.access_token}}
+
+### Aggregated feed — defaults (all sources)
+GET {{api}}/api/feed
+Authorization: Bearer {{bearer}}
+
+### Feed — weather for a city + search term, small page
+GET {{api}}/api/feed?city=Berlin&searchTerm=dotnet&pageSize=5&maxItemsPerSource=5
+Authorization: Bearer {{bearer}}
+
+### Feed — only news, newest first
+GET {{api}}/api/feed?category=news&sortBy=Timestamp&order=Descending
+Authorization: Bearer {{bearer}}
+
+### Feed — most-starred repositories about kubernetes
+GET {{api}}/api/feed?searchTerm=kubernetes&category=repository&sortBy=Relevance&order=Descending&pageSize=10
+Authorization: Bearer {{bearer}}
+
+### Feed — filter by source and date range
+GET {{api}}/api/feed?source=spaceflight-news&from=2026-01-01T00:00:00Z
+Authorization: Bearer {{bearer}}
+
+### Request statistics
+GET {{api}}/api/statistics
+Authorization: Bearer {{bearer}}
+
+### --- Validation error example (pageSize out of range -> 400) ---
+GET {{api}}/api/feed?pageSize=0
+Authorization: Bearer {{bearer}}
+
+### --- Running with Authentication:Enabled=false? Drop the Authorization headers. ---
