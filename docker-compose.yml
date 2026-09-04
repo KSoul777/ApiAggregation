@@ -1,0 +1,53 @@
+name: api-aggregator
+
+services:
+  aggregator.api:
+    image: ${DOCKER_REGISTRY-}aggregatorapi
+    container_name: aggregator.api
+    build:
+      context: .
+      dockerfile: src/API/Aggregator.Api/Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_HTTP_PORTS: "8080"
+      ConnectionStrings__Cache: "redis:6379,abortConnect=false"
+      Authentication__Enabled: "false"
+      KeyCloak__HealthUrl: "http://keycloak:9000/health/ready"
+    ports:
+      - "5247:8080"
+    depends_on:
+      - redis
+      - keycloak
+      - seq
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:26.1
+    container_name: aggregator.keycloak
+    command: start-dev --import-realm
+    environment:
+      KC_BOOTSTRAP_ADMIN_USERNAME: admin
+      KC_BOOTSTRAP_ADMIN_PASSWORD: admin
+      KC_HEALTH_ENABLED: "true"
+    ports:
+      - "8080:8080"
+      - "9000:9000"
+    volumes:
+      - ./keycloak/realm-export.json:/opt/keycloak/data/import/realm-export.json:ro
+    user: root
+    
+  seq:
+    image: datalust/seq:2025.2
+    container_name: aggregator.seq
+    environment:
+      ACCEPT_EULA: "Y"
+      SEQ_FIRSTRUN_NOAUTHENTICATION: "true"
+    ports:
+      - "5341:5341"
+      - "8081:80"
+
+  redis:
+    image: redis:7.4-alpine
+    container_name: aggregator.redis
+    command: ["redis-server", "--save", "", "--appendonly", "no"]
+    ports:
+      - "6379:6379"
