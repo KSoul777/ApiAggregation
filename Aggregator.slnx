@@ -1,0 +1,32 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path=".editorconfig" />
+    <File Path="CLAUDE.md" />
+    <File Path="Directory.Build.props" />
+    <File Path="Directory.Packages.props" />
+    <File Path="README.md" />
+  </Folder>
+  <Folder Name="/Solution Items/claude/">
+    <File Path="claude/architecture.md" />
+  </Folder>
+  <Folder Name="/src/" />
+  <Folder Name="/src/API/">
+    <Project Path="src/API/Aggregator.Api/Aggregator.Api.csproj" />
+  </Folder>
+  <Folder Name="/src/Common/">
+    <Project Path="src/Common/Aggregator.Common.Application/Aggregator.Common.Application.csproj" />
+    <Project Path="src/Common/Aggregator.Common.Domain/Aggregator.Common.Domain.csproj" />
+    <Project Path="src/Common/Aggregator.Common.Infrastructure/Aggregator.Common.Infrastructure.csproj" />
+    <Project Path="src/Common/Aggregator.Common.Presentation/Aggregator.Common.Presentation.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/" />
+  <Folder Name="/src/Modules/Aggregation/">
+    <Project Path="src/Modules/Aggregation/Aggregator.Aggregation.Application/Aggregator.Aggregation.Application.csproj" />
+    <Project Path="src/Modules/Aggregation/Aggregator.Aggregation.Infrastructure/Aggregator.Aggregation.Infrastructure.csproj" />
+    <Project Path="src/Modules/Aggregation/Aggregator.Aggregation.Presentation/Aggregator.Aggregation.Presentation.csproj" />
+  </Folder>
+  <Folder Name="/test/">
+    <Project Path="test/Aggregator.ArchitectureTests/Aggregator.ArchitectureTests.csproj" />
+    <Project Path="test/Aggregator.Aggregation.Tests/Aggregator.Aggregation.Tests.csproj" />
+  </Folder>
+</Solution>
