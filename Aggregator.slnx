@@ -25,8 +25,14 @@
     <Project Path="src/Modules/Aggregation/Aggregator.Aggregation.Infrastructure/Aggregator.Aggregation.Infrastructure.csproj" />
     <Project Path="src/Modules/Aggregation/Aggregator.Aggregation.Presentation/Aggregator.Aggregation.Presentation.csproj" />
   </Folder>
-  <Folder Name="/test/">
-    <Project Path="test/Aggregator.ArchitectureTests/Aggregator.ArchitectureTests.csproj" />
+  <Folder Name="/src/Modules/Aggregation/test/">
+    <Project Path="test/Aggregator.Aggregation.IntegrationTests/Aggregator.Aggregation.IntegrationTests.csproj" />
     <Project Path="test/Aggregator.Aggregation.Tests/Aggregator.Aggregation.Tests.csproj" />
   </Folder>
+  <Folder Name="/test/">
+    <Project Path="test/Aggregator.ArchitectureTests/Aggregator.ArchitectureTests.csproj" />
+  </Folder>
+  <Project Path="docker-compose.dcproj">
+    <Build />
+  </Project>
 </Solution>
