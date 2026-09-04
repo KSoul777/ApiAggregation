@@ -9,7 +9,7 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Aggregator.Common.Infrastructure;
 
-public static class CommonInfrastructureConfiguration
+public static class InfrastructureConfiguration
 {
     private const string CacheConnectionStringName = "Cache";
 
