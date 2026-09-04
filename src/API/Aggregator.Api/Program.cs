@@ -1,4 +1,3 @@
-using System.Globalization;
 using System.Reflection;
 using Aggregator.Aggregation.Infrastructure;
 using Aggregator.Api.Extensions;

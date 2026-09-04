@@ -17,11 +17,11 @@ public static class InfrastructureConfiguration
         this IServiceCollection services,
         IConfiguration configuration)
     {
+        services.AddAuthenticationInternal(configuration);
+
         services.TryAddSingleton<IDateTimeProvider, DateTimeProvider>();
 
         AddCaching(services, configuration);
-
-        services.AddAuthenticationInternal(configuration);
 
         return services;
     }
