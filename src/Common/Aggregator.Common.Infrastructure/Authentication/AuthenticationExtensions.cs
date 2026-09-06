@@ -29,6 +29,11 @@ internal static class AuthenticationExtensions
                     }
                 }));
 
+        if (!enabled)
+        {
+            return services;
+        }
+
         services.AddAuthentication().AddJwtBearer();
         services.ConfigureOptions<JwtBearerConfigureOptions>();
 
